@@ -1,86 +1,3 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-
-//React.createElement ==> object, when it is render in DOM it is HTML element
-
-/*
-Header
-- logo
-- menu item or nav item
-Body
-- Search
-- RestaurantContainer
-  - Restaurant card
-    - Restaurant name
-    - Rating
-    - cuisine
-    - delivery time
-Footer
- - copyright
- - links
- - address
- - contact us
-*/
-
-const Header = () => {
-  return (
-    <div className="header">
-      <div className="logo-container">
-        <img
-          className="logo"
-          src="https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png?nwm=1&nws=1&industry=fast-food&sf=&txt_keyword=All"
-          alt="logo"
-        />
-      </div>
-      <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About us</li>
-          <li>Contact us</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-// const RestaurantCard = ({resName, cuisine}) => { Destructre
-const RestaurantCard = (props) => {
-  const { resData } = props;
-  const {
-    cloudinaryImageId,
-    name,
-    cuisines,
-    avgRating,
-    costForTwoString,
-    deliveryTime,
-  } = resData?.card.card.info;
-  console.log(props.resName);
-  return (
-    <div
-      className="res-card"
-      style={{
-        backgroundColor: "#f0f0f0",
-      }}
-    >
-      <img
-        className="res-logo"
-        alt="res-logo"
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_264,h_288,c_fill/" +
-          cloudinaryImageId
-        }
-      />
-      <h3>{name}</h3>
-      <h4>{cuisines.join(",   ")}</h4>
-      <h4>{avgRating}</h4>
-      {/* <h4>{resData[0].card.card.info.costForTwo / 100}</h4> */}
-      <h4>{costForTwoString}</h4>
-      <h4>{deliveryTime}</h4>
-    </div>
-  );
-};
-
 const resList = [
   {
     card: {
@@ -152,7 +69,7 @@ const resList = [
           areaName: "Whitefield",
           costForTwoString: 35000,
           cuisines: ["North Indian", "Punjabi", "Tandoor"],
-          avgRating: 4.1,
+          avgRating: 3,
           veg: true,
           deliveryTime: 35,
           slaString: "35-40 mins",
@@ -171,7 +88,7 @@ const resList = [
           areaName: "JP Nagar",
           costForTwoString: 25000,
           cuisines: ["South Indian", "Udupi", "Beverages"],
-          avgRating: 4.6,
+          avgRating: 3,
           veg: true,
           deliveryTime: 22,
           slaString: "22-27 mins",
@@ -190,7 +107,7 @@ const resList = [
           areaName: "JP Nagar",
           costForTwoString: 40000,
           cuisines: ["Continental", "American", "Pan Asian"],
-          avgRating: 4.3,
+          avgRating: 3,
           veg: false,
           deliveryTime: 27,
           slaString: "27-32 mins",
@@ -200,36 +117,4 @@ const resList = [
   },
 ];
 
-// not using keys (not acceptable) <<< index as key(index is better than not using without key) << unique id (id is best practice, prefer)
-const Body = () => {
-  return (
-    <div className="body">
-      <div className="search">Search</div>
-      <div className="res-container">
-        {resList.map((restraunt) => (
-          <RestaurantCard
-            resData={restraunt}
-            key={restraunt.card.card.info.id}
-          />
-        ))}
-        {/* <RestaurantCard
-          resData={resList[0]}
-          resName="Meghana Foods"
-          cuisine="Biryani, South Indian, India"
-        /> */}
-      </div>
-    </div>
-  );
-};
-
-const AppLayout = () => {
-  return (
-    <div className="app">
-      <Header />
-      <Body />
-    </div>
-  );
-};
-
-const root = createRoot(document.getElementById("root"));
-root.render(<AppLayout />);
+export default resList;
