@@ -7,10 +7,11 @@ const RestaurantCard = (props) => {
     name,
     cuisines,
     avgRating,
-    costForTwoString,
-    deliveryTime,
+    costForTwo,
+    sla: { deliveryTime },
   } = resData?.card.card.info;
   // console.log(props.resName);
+  const FALLBACK_IMAGE_ID = "weuqdjwzk3azoijehne";
   return (
     <div
       className="res-card"
@@ -21,13 +22,13 @@ const RestaurantCard = (props) => {
       <img
         className="res-logo"
         alt="res-logo"
-        src={CDN_URL + cloudinaryImageId}
+        src={CDN_URL + (cloudinaryImageId || FALLBACK_IMAGE_ID)}
       />
       <h3>{name}</h3>
       <h4>{cuisines.join(",   ")}</h4>
       <h4>{avgRating}</h4>
       {/* <h4>{resData[0].card.card.info.costForTwo / 100}</h4> */}
-      <h4>{costForTwoString}</h4>
+      <h4>{costForTwo}</h4>
       <h4>{deliveryTime}</h4>
     </div>
   );
